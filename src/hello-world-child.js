@@ -1,11 +1,14 @@
-import { Element } from './element';
+import { Component } from './component';
 
-class HelloWorldChild extends Element {
+const stylesheetElement = document.createElement('style');
+stylesheetElement.innerHTML = `div {
+  color: green;
+}`;
+
+class HelloWorldChild extends Component {
   constructor() {
     super({
-      stylesheet: `div {
-                      color: green;
-                    }`
+      stylesheetElement 
     });
   }
 
