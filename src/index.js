@@ -5,13 +5,22 @@ function createJSXElement() {
     const [node, path, ...children] = arguments;
     const element = document.createElement(node);
     Object.assign(element,path||{});
-    children.forEach(child => {
-        if(typeof child === 'string') {
+    // console.dir(arguments);
+    const appendChild = (child) => {
+        if(typeof child !== 'object') {
             element.appendChild(document.createTextNode(child));
+        } else if (Array.isArray(child)) {
+            child.forEach(appendChild);
         } else {
-            element.appendChild(child);
+            try{
+                element.appendChild(child);
+                } catch(e) {
+                    console.error(e);
+                    console.error(child);
+                }
         }
-    });
+    }
+    appendChild(children);
     return element;
 }
 
